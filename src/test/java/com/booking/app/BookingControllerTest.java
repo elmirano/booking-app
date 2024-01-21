@@ -4,7 +4,9 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import com.booking.app.controller.BookingController;
+import com.booking.app.controller.BookingControllerImpl;
 import com.booking.app.controller.service.BookingService;
+import com.booking.app.controller.service.BookingServiceImpl;
 import com.booking.app.exception.InvalidShowException;
 import com.booking.app.exception.ShowAlreadyExistsException;
 import com.booking.app.model.Show;
@@ -19,9 +21,9 @@ public class BookingControllerTest {
 	BookingRepo bookingRepo = new BookingRepo();
 	BookedPhoneRepo bookedPhoneRepo = new BookedPhoneRepo();
 	TicketRepo ticketRepo = new TicketRepo();
-	BookingService bookingService = new BookingService(showRepo, bookingRepo, bookedPhoneRepo, ticketRepo);
+	BookingService bookingService = new BookingServiceImpl(showRepo, bookingRepo, bookedPhoneRepo, ticketRepo);
 //	Show show = new Show("12345", 5, 5, 2, null);
-	BookingController bookingController = new BookingController(bookingService);
+	BookingController bookingController = new BookingControllerImpl(bookingService);
 
 	@Test
 	public void testCreateShow() {

@@ -16,9 +16,8 @@ public class ShowRepo {
 		return true;
 	}
 
-	public Optional<Show> findById(String showNumber) {
-		var show = shows.get(showNumber);
-		return Optional.ofNullable(show);
+	public Show findById(String showNumber) {
+		return shows.get(showNumber);
 	}
 
 }

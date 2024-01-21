@@ -1,7 +1,9 @@
 package com.booking.app;
 
 import com.booking.app.controller.BookingController;
+import com.booking.app.controller.BookingControllerImpl;
 import com.booking.app.controller.service.BookingService;
+import com.booking.app.controller.service.BookingServiceImpl;
 import com.booking.app.exception.CancelBookingException;
 import com.booking.app.exception.InvalidBookingException;
 import com.booking.app.exception.InvalidShowException;
@@ -38,9 +40,9 @@ public class ShowBookingBackendApp {
 		BookingRepo bookingRepoInstance = new BookingRepo();
 		BookedPhoneRepo bookedPhoneRepoInstance = new BookedPhoneRepo();
 		TicketRepo ticketRepoInstance = new TicketRepo();
-		BookingService bookingServiceIstance = new BookingService(showRepoInstance, bookingRepoInstance,
+		BookingService bookingServiceIstance = new BookingServiceImpl(showRepoInstance, bookingRepoInstance,
 				bookedPhoneRepoInstance, ticketRepoInstance);
-		BookingController bookingController = new BookingController(bookingServiceIstance);
+		BookingController bookingController = new BookingControllerImpl(bookingServiceIstance);
 		ShowBookingBackendApp appInstance = new ShowBookingBackendApp();
 		appInstance.setBookingController(bookingController);
 		return appInstance;
