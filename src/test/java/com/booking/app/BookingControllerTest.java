@@ -12,6 +12,7 @@ import com.booking.app.exception.ShowAlreadyExistsException;
 import com.booking.app.model.Show;
 import com.booking.app.repository.BookedPhoneRepo;
 import com.booking.app.repository.BookingRepo;
+import com.booking.app.repository.Repository;
 import com.booking.app.repository.ShowRepo;
 import com.booking.app.repository.TicketRepo;
 

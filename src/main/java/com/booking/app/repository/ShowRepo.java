@@ -6,8 +6,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.booking.app.model.Show;
+import com.booking.app.model.Ticket;
 
-public class ShowRepo {
+public class ShowRepo implements Repository<Show>{
 
 	private Map<String, Show> shows = new HashMap<>();
 
@@ -18,6 +19,11 @@ public class ShowRepo {
 
 	public Show findById(String showNumber) {
 		return shows.get(showNumber);
+	}
+
+	@Override
+	public void delete(String ticketNumber) {
+		// not implemented		
 	}
 
 }
