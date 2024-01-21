@@ -106,7 +106,7 @@ public class BookingServiceImpl implements BookingService {
 		}
 
 		var show = showRepo.findById(showNumber);
-		if (show==null) {
+		if (show == null) {
 			throw new ShowNotFoundExeption("Show number does not exist.");
 		}
 
