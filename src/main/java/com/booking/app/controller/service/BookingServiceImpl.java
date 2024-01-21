@@ -183,7 +183,7 @@ public class BookingServiceImpl implements BookingService {
 
 	private boolean isValidBookingPhone(String showNumber, String phoneNumber) {
 
-		var bookings = bookingRepo.findById(showNumber);
+		var bookings = bookingRepo.findBookingsById(showNumber);
 		if (bookings == null) {
 			return true;
 		}

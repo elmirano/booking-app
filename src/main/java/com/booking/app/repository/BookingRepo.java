@@ -5,13 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.booking.app.model.BookedPhone;
 import com.booking.app.model.Booking;
 
-public class BookingRepo {
+public class BookingRepo implements Repository<Booking>{
 
 	private Map<String, List<Booking>> bookingList = new HashMap<>();
 
-	public List<Booking> findById(String showNumber) {
+	public List<Booking> findBookingsById(String showNumber) {
 		return bookingList.get(showNumber);
 	}
 
@@ -25,5 +26,17 @@ public class BookingRepo {
 			bookings.add(booking);
 		}
 		return true;
+	}
+
+	@Override
+	public Booking findById(String ticketNumber) {
+		// not implemented
+		return null;
+	}
+
+	@Override
+	public void delete(String ticketNumber) {
+		// not implemented
+		
 	}
 }
