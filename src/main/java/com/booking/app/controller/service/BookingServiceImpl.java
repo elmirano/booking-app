@@ -72,13 +72,6 @@ public class BookingServiceImpl implements BookingService {
 		if (show == null) {
 			throw new ShowNotFoundExeption("Show number does not exist.");
 		}
-
-		var tempShow = new Show(show.getShowNumber(), show.getNumRows(), show.getSeatsPerRow(),
-				show.getCancellationWindowMinutes(), null);
-		var seats = show.getSeats().stream().filter(seat -> seat.isBooked()).collect(Collectors.toList());
-		tempShow.setSeats(seats);
-
-//		return tempShow;
 		return show;
 	}
 
