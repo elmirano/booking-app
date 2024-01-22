@@ -78,7 +78,8 @@ public class BookingServiceImpl implements BookingService {
 		var seats = show.getSeats().stream().filter(seat -> seat.isBooked()).collect(Collectors.toList());
 		tempShow.setSeats(seats);
 
-		return tempShow;
+//		return tempShow;
+		return show;
 	}
 
 	@Override

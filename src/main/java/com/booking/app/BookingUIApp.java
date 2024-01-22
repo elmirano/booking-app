@@ -60,7 +60,7 @@ public class BookingUIApp {
 					invalidSelection = true;
 				}
 			}
-		} else if (userName.equalsIgnoreCase("user")) {
+		} else if (userName.equalsIgnoreCase("buyer")) {
 			invalidSelection = false;
 			while (true) {
 				printSeparator();

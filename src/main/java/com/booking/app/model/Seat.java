@@ -36,7 +36,7 @@ public class Seat {
 
 	@Override
 	public String toString() {
-		return "Seat [seatNumber=" + seatNumber + ", ticketNumber=" + ticketNumber + "]";
+		return "Seat [seatNumber=" + seatNumber + (!"".equals(ticketNumber)?", ticketNumber=" + ticketNumber:"") + "]";
 	}
 
 }
