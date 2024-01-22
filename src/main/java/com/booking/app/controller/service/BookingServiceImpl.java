@@ -123,6 +123,7 @@ public class BookingServiceImpl implements BookingService {
 			if (seatFilter.contains(seat.getSeatNumber())) {
 				seat.setBooked(true);
 				seat.setTicketNumber(showNumber.concat(seat.getSeatNumber()));
+				seat.setPhoneNumber(phoneNumber);
 				ticketRepo.save(new Ticket(seat.getTicketNumber(), phoneNumber, showNumber));
 			}
 		}
@@ -164,6 +165,7 @@ public class BookingServiceImpl implements BookingService {
 				.forEach(seat -> {
 					seat.setTicketNumber("");
 					seat.setBooked(false);
+					seat.setPhoneNumber("");
 				});
 		showRepo.save(show);
 

@@ -54,7 +54,7 @@ public class BookingControllerTest {
 		bookingController.createShow("12345", 5, 5, 2);
 		Show show = bookingController.viewShowAllocatedSeats("12345");
 		Assert.assertEquals(show.getShowNumber(), showResult.getShowNumber());
-		Assert.assertEquals(show.getSeats().size(), 0);
+		Assert.assertEquals(show.getSeats().size(), showResult.getSeats().size());
 		Assert.assertEquals(show.getNumRows(), showResult.getNumRows());
 		Assert.assertEquals(show.getSeatsPerRow(), showResult.getSeatsPerRow());
 		Assert.assertEquals(show.getCancellationWindowMinutes(), showResult.getCancellationWindowMinutes());

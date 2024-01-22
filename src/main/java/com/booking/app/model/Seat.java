@@ -4,6 +4,7 @@ public class Seat {
 	private String seatNumber;
 	private boolean isBooked;
 	private String ticketNumber = "";
+	private String phoneNumber = "";
 
 	public Seat(String seatNumber) {
 		this.seatNumber = seatNumber;
@@ -34,9 +35,18 @@ public class Seat {
 		this.ticketNumber = ticketNumber;
 	}
 
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
 	@Override
 	public String toString() {
-		return "Seat [seatNumber=" + seatNumber + (!"".equals(ticketNumber)?", ticketNumber=" + ticketNumber:"") + "]";
+		return "Seat [seatNumber=" + seatNumber + (!"".equals(ticketNumber) ? ", ticketNumber=" + ticketNumber : "") + (!"".equals(phoneNumber) ? ", phoneNumber=" + phoneNumber : "")
+				+ "]";
 	}
 
 }
