@@ -3,8 +3,7 @@ package com.booking.app.controller;
 import com.booking.app.controller.service.BookingService;
 import com.booking.app.exception.CancelBookingException;
 import com.booking.app.exception.InvalidBookingException;
-import com.booking.app.exception.InvalidShowException;
-import com.booking.app.exception.PhoneAlreadyBookedException;
+import com.booking.app.exception.ShowCreationException;
 import com.booking.app.exception.ShowAlreadyExistsException;
 import com.booking.app.exception.ShowNotFoundExeption;
 import com.booking.app.model.Show;
@@ -30,7 +29,7 @@ public class BookingControllerImpl implements BookingController {
 
 	@Override
 	public boolean createBooking(String showNumber, String phoneNumber, String[] selectedSeats)
-			throws PhoneAlreadyBookedException, InvalidBookingException, ShowNotFoundExeption {
+			throws InvalidBookingException, ShowNotFoundExeption {
 
 		bookingService.createBooking(showNumber, phoneNumber, selectedSeats);
 		return true;
@@ -39,12 +38,12 @@ public class BookingControllerImpl implements BookingController {
 	@Override
 	public boolean cancelTicket(String ticket, String phoneNumber) throws CancelBookingException {
 		bookingService.cancelTicket(ticket, phoneNumber);
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean createShow(String showNumber, int rows, int seatsPerRow, int cancelWindowInMins)
-			throws ShowAlreadyExistsException, InvalidShowException {
+			throws ShowAlreadyExistsException, ShowCreationException {
 		Show show = BookingUtils.showInitializer(showNumber, rows, seatsPerRow, cancelWindowInMins);
 		bookingService.createShow(show);
 		return true;

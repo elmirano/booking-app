@@ -6,8 +6,7 @@ import com.booking.app.controller.service.BookingService;
 import com.booking.app.controller.service.BookingServiceImpl;
 import com.booking.app.exception.CancelBookingException;
 import com.booking.app.exception.InvalidBookingException;
-import com.booking.app.exception.InvalidShowException;
-import com.booking.app.exception.PhoneAlreadyBookedException;
+import com.booking.app.exception.ShowCreationException;
 import com.booking.app.exception.ShowAlreadyExistsException;
 import com.booking.app.exception.ShowNotFoundExeption;
 import com.booking.app.repository.BookedPhoneRepo;
@@ -57,7 +56,7 @@ public class ShowBookingBackendApp {
 			bookingController.createShow(showNumber, numRows, seatsPerRow, cancellationWindowMinutes);
 			System.out.println("Show " + showNumber + " added successfully.");
 
-		} catch (ShowAlreadyExistsException | InvalidShowException e) {
+		} catch (ShowAlreadyExistsException | ShowCreationException e) {
 			System.out.printf("Invalid show number. %s\n", e.getMessage());
 //			e.printStackTrace();
 		}
@@ -94,7 +93,7 @@ public class ShowBookingBackendApp {
 		try {
 			bookingController.createBooking(showNumber, phoneNumber, selectedSeats);
 			System.out.println("Booking created successfully.");
-		} catch (PhoneAlreadyBookedException | InvalidBookingException | ShowNotFoundExeption e) {
+		} catch (InvalidBookingException | ShowNotFoundExeption e) {
 			System.out.printf("Invalid booking. %s\n", e.getMessage());
 //			e.printStackTrace();
 		}

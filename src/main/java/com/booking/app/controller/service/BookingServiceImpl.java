@@ -5,8 +5,7 @@ import java.util.stream.Collectors;
 
 import com.booking.app.exception.CancelBookingException;
 import com.booking.app.exception.InvalidBookingException;
-import com.booking.app.exception.InvalidShowException;
-import com.booking.app.exception.PhoneAlreadyBookedException;
+import com.booking.app.exception.ShowCreationException;
 import com.booking.app.exception.ShowAlreadyExistsException;
 import com.booking.app.exception.ShowNotFoundExeption;
 import com.booking.app.model.BookedPhone;
@@ -16,7 +15,6 @@ import com.booking.app.model.Show;
 import com.booking.app.model.Ticket;
 import com.booking.app.repository.BookedPhoneRepo;
 import com.booking.app.repository.BookingRepo;
-import com.booking.app.repository.Repository;
 import com.booking.app.repository.ShowRepo;
 import com.booking.app.repository.TicketRepo;
 
@@ -36,30 +34,21 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public boolean createShow(Show show) throws ShowAlreadyExistsException, InvalidShowException {
+	public boolean createShow(Show show) throws ShowCreationException {
 		if (show.getNumRows() > 26) {
-			throw new InvalidShowException("Maximum rows is 26.");
+			throw new ShowCreationException("Maximum rows is 26.");
 		}
 		if (show.getSeatsPerRow() > 10) {
-			throw new InvalidShowException("Maximum seats per row is 10.");
+			throw new ShowCreationException("Maximum seats per row is 10.");
 		}
 		if (show.getCancellationWindowMinutes() < 2) {
-			throw new InvalidShowException("Minimum time(in mins) to cancel the booking is 2 minutes.");
+			throw new ShowCreationException("Minimum time(in mins) to cancel the booking is 2 minutes.");
 		}
 		var fetchedShow = showRepo.findById(show.getShowNumber());
 		if (fetchedShow != null) {
-			throw new ShowAlreadyExistsException("Show number already exists");
+			throw new ShowCreationException("Show number already exists");
 		}
 		return showRepo.save(show);
-	}
-
-	@Override
-	public Show getShowByShowNumber(String shoNumber) throws ShowNotFoundExeption {
-		var show = showRepo.findById(shoNumber);
-		if (show == null) {
-			throw new ShowNotFoundExeption("Show number does not exist.");
-		}
-		return show;
 	}
 
 	@Override
@@ -94,7 +83,7 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public boolean createBooking(String showNumber, String phoneNumber, String[] selectedSeats)
-			throws PhoneAlreadyBookedException, ShowNotFoundExeption, InvalidBookingException {
+			throws InvalidBookingException {
 
 		if (selectedSeats.length == 0) {
 			throw new InvalidBookingException("Invalid seats information.");
@@ -102,12 +91,12 @@ public class BookingServiceImpl implements BookingService {
 
 		// validate phone if already been used in booking
 		if (!isValidBookingPhone(showNumber, phoneNumber)) {
-			throw new PhoneAlreadyBookedException("Booking already exists for this phone number in the show.");
+			throw new InvalidBookingException("Booking already exists for this phone number in the show.");
 		}
 
 		var show = showRepo.findById(showNumber);
 		if (show == null) {
-			throw new ShowNotFoundExeption("Show number does not exist.");
+			throw new InvalidBookingException("Show number does not exist.");
 		}
 
 		var seatFilter = Arrays.asList(selectedSeats);
